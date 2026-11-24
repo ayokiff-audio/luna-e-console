@@ -1,0 +1,28 @@
+E Console Analog 0.1.1 — native validation, 2026-11-24
+
+Build: universal macOS arm64 + x86_64, deployment target 11.0.
+AudioComponent version: 0x00000101 (257); CFBundleShortVersionString: 0.1.1; CFBundleVersion: 2.
+DSP: 12,394 assertions passed.
+Built-bundle AUv2 factory/selector ABI: 23,952 assertions passed.
+DSP ThreadSanitizer run: 12,394 assertions passed, exit 0, no reported data race, including concurrent track publishing and receive-only bus rendering.
+64 enabled track benchmark: 0.127381 wall seconds for 1 second of 48 kHz audio, 512-frame blocks, serial processing, two nearest peers, leakage on.
+
+Native behavior verified in the actual compiled bundle:
+- Console Seed writes change rendered audio; restoring the seed restores exactly the earlier color.
+- Each new native instance has an immutable, distinct generated Seed metadata default matching its initial actual value.
+- Simulated host writes of those metadata defaults preserve distinct actual seeds.
+- Track audio reaches enabled Bus and Master instances in the same group.
+- Bus/Master input is never published to upstream Track instances.
+- Bus/Master reception remains opt-in through Crosstalk Enabled.
+- Receive-only reset/backward seek invalidates stopped track history, without erasing other tracks dry delay.
+
+Compatibility: same eight parameter IDs/ranges, same role numbers 0/1/2, same component identity and saved-state layout. Existing saved seeds remain unchanged. Role1/2 changes from isolated to receive-only when explicitly enabled. Updating a loaded host requires it to reload/rescan the new AU binary; a UI refresh alone cannot update loaded native code.
+
+Archive: native/build/E Console Analog 0.1.1.zip
+SHA-256: f6985ff161fd6e213c7d311847b2da238ebdc772f2cf9ac27978c8ebffafe5d1
+Archive-extracted component: codesign --verify --strict --verbose=2 passed.
+Info.plist: plutil validation passed.
+
+Workspace caveat: Documents File Provider re-adds com.apple.FinderInfo to package directories, so strict signature verification of the workspace copy can reject that metadata. The archive omits extended attributes, and a clean extraction passes strict verification. Copy with ditto --norsrc when installing.
+
+Host limitations: this native test suite did not drive LUNA. End-to-end LUNA/UADx behavior, routing-aware phase alignment, latency compensation, listening quality, and offline sharing remain outside these tests. Apple AudioComponent registrar was inaccessible in the execution sandbox, so no complete auval pass is claimed. Factory tests used the actual loaded built-bundle public ABI after registrar failure.
