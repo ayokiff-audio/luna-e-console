@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><title>E Console · Mixing Console</title><link rel="stylesheet" href="console.css"></head>
+<body>
+<header class="console-header">
+  <div class="wordmark"><span class="logo">E</span><div><h1>E CONSOLE</h1><p>4000 SERIES · MIXING CONSOLE</p></div></div>
+  <div class="connection-block"><span id="connection" class="connection offline">OFFLINE</span><span id="session-name">Open LUNA and a session</span></div>
+  <div class="connection-actions"><button id="connect">Connect to LUNA</button><button id="preview">Preview</button><button id="help" aria-expanded="false">?</button></div>
+</header>
+<div class="toolbar">
+  <nav aria-label="Channel view"><button data-scope="all" class="active">ALL CHANNELS</button><button data-scope="tracks">TRACKS</button><button data-scope="buses">BUSES</button><button data-scope="selected">SELECTED</button></nav>
+  <button id="mix-view" class="view-button" aria-pressed="false">Mix view</button>
+  <label class="search-label"><span>FIND</span><input id="search" type="search" placeholder="Channel name" aria-label="Find channel"></label>
+  <span class="toolbar-spacer"></span>
+  <label class="global-group">GROUP <input id="console-group" type="number" min="1" max="65535" value="1" aria-label="Shared console group"></label>
+  <button id="link-companions" class="toolbar-action" title="Enable crosstalk on every loaded companion and connect them to this group">Crosstalk all on</button>
+  <button id="unlink-companions" class="toolbar-action" title="Disable crosstalk on every loaded companion">Crosstalk all off</button>
+  <button id="randomize-seeds" class="toolbar-action">Randomize all seeds</button>
+</div>
+<div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+<aside id="help-panel" class="help-panel" hidden><p>This console controls your installed SSL plugins in LUNA. Drag knobs vertically; double-click a knob or fader to restore its plugin default. Click a channel name to select it, then use Setup to add SSL and its analog companion into empty inserts.</p><p>Crosstalk all on connects every loaded companion to the shared group and enables audio interaction, including buses and the master. Crosstalk all off disables it everywhere. You can still exclude an individual strip with its own switch. Tracks publish and receive; buses and the master receive without publishing. Each companion reports 4096 samples of latency.</p><p>PREVIEW uses simulated controls and makes no audio. In LIVE mode, meters show only values received from LUNA. This independent console is not a native LUNA console Extension or a measured SSL circuit model.</p></aside>
+<div class="format-bar"><span id="channel-count">0 CHANNELS</span><label>STRIP FORMAT <select id="strip-format" aria-label="SSL channel strip format"></select></label><label>MASTER FORMAT <select id="master-format" aria-label="SSL master compressor format"></select></label><button id="refresh">Refresh plugins</button><span id="read-only" hidden>READ ONLY</span></div>
+<main id="desk" class="desk" aria-label="Mixing console">
+  <div id="welcome" class="welcome"><div class="welcome-rule"></div><span class="welcome-overline">YOUR MIX. ONE CONSOLE.</span><h2>Every strip.<br>Within reach.</h2><p>SSL channel controls, individual analog character, and your master bus in a dedicated mixing window.</p><button id="welcome-connect">Connect to LUNA</button><button id="welcome-preview">Explore the console</button><p class="welcome-small">LUNA 3.1.2 or later · SSL E Channel Strip + SSL G Bus Compressor</p></div>
+  <div id="mixer" class="mixer" hidden><div id="channels" class="channels"></div><div id="master" class="master-host"></div></div>
+</main>
+<footer><span id="selected-channel">NO CHANNEL SELECTED</span><span id="footer-note">Drag to adjust · Double-click to reset</span><span id="version">E CONSOLE · FULL MIXER</span></footer>
+<script src="vendor/luna.global.js"></script><script src="logic.js"></script><script src="companion.js"></script><script src="demo.js"></script><script src="console.js"></script>
+</body></html>

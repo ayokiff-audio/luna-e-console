@@ -1,0 +1,15 @@
+# Generated audio/app bundles and downloads
+*.app/
+*.component/
+*.lunaaddon
+*.zip
+native/build/
+node_modules/
+work/
+*.log
+.DS_Store
+.env
+.env.*
+# Local host diagnostics
+/*-check.json
+/*-verification.json

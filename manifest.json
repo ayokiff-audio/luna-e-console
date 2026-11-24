@@ -1,0 +1,28 @@
+{
+  "package_name": "E Console",
+  "id": "com.econsole.control",
+  "title": "E Console",
+  "version": "0.2.1",
+  "description": "A dedicated SSL-style mixing console for LUNA with native harmonic identities and session-wide companion linking.",
+  "categories": [
+    "Mixing & Mastering",
+    "Control"
+  ],
+  "sdk_version": "3.1.2",
+  "min_luna_version": "3.1.2",
+  "engines": [
+    "luna"
+  ],
+  "html": "console.html",
+  "target": "window",
+  "targets": [
+    "window",
+    "browser"
+  ],
+  "floating": false,
+  "show_with_session": false,
+  "width": 1500,
+  "height": 950,
+  "min_width": 900,
+  "min_height": 620
+}
